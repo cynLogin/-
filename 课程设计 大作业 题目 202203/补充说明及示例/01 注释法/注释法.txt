@@ -1,0 +1,67 @@
+  假如有10行语句，可以注释5～10，或者4～10，但不能注释3～5，因为你把3、4、5等三行语句注释了，
+后面语句的执行必然有问题，因为它们要依靠前面的语句的结果来执行。
+
+例：有错程序
+#include <stdio.h>
+void main()
+{
+    int i,m;
+    printf("m=");
+    scanf("%d",m);
+    printf("m=%d\n",m);
+    for(i=1;i<=m;i++)
+    {	printf("%d\n",i);
+    }
+}
+
+错误方法：
+#include <stdio.h>
+void main()
+{
+    int i,m;
+    printf("m=");
+    /*
+    scanf("%d",m);
+    */
+    printf("m=%d\n",m);
+    for(i=1;i<=m;i++)
+    {	printf("%d\n",i);
+    }
+}
+//这个程序的注释，行吗？
+//显示不行，m不用scanf输入，必然会影响以后的语句。
+
+
+正确步骤：
+1、
+#include <stdio.h>
+void main()
+{
+    int i,m;
+    printf("m=");
+    /*
+    scanf("%d",m);
+    printf("m=%d\n",m);
+    for(i=1;i<=m;i++)
+    {	printf("%d\n",i);
+    }
+    */     //这个符号永远不动，就放在最后一行
+}
+//未出错，但结果不正确。
+
+2、
+#include <stdio.h>void main()
+{
+    int i,m;
+    printf("m=");
+    scanf("%d",m);
+    /*
+    printf("m=%d\n",m);
+    for(i=1;i<=m;i++)
+    {	printf("%d\n",i);
+    }
+    */     //这个符号永远不动，就放在最后一行。
+}
+//移动【/*】，弹出错误框口，说明【/*】在步骤1、2之间的相关语句【scanf("%d",m);】有问题。
+
+
